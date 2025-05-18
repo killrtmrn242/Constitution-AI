@@ -5,67 +5,70 @@ An AI-powered assistant that can answer questions about the Constitution of the 
 ## Features
 
 - Interactive chat interface using Streamlit
-- Integration with OpenAI's GPT-3.5 Turbo model
+- Integration with Ollama (using Llama 2 model)
 - Vector storage using ChromaDB for efficient document retrieval
 - Support for multiple document formats (PDF, DOCX, TXT)
 - Automatic scraping and processing of the Constitution text
 - Chat history tracking
 - Document upload functionality (single or multiple files)
 
-## Setup
+## Prerequisites
 
-1. Clone this repository:
-```bash
-git clone <repository-url>
-cd <repository-name>
-```
+1. Install Ollama:
+   - Download from https://ollama.ai/
+   - Run the installer
+   - Start Ollama from the Start Menu (Windows) or run `ollama serve` (Mac/Linux)
 
-2. Install the required dependencies:
+2. Install Python dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Create a `.env` file in the project root and add your OpenAI API key:
-```
-OPENAI_API_KEY=your_api_key_here
-```
-
-Alternatively, you can input your API key directly in the application's sidebar.
-
 ## Running the Application
 
-1. Start the Streamlit application:
+1. Make sure Ollama is running on your system
+
+2. Start the Streamlit application:
 ```bash
 streamlit run app.py
 ```
 
-2. Open your web browser and navigate to the URL shown in the terminal (typically `http://localhost:8501`)
+3. Open your web browser and navigate to the URL shown in the terminal (typically `http://localhost:8501`)
 
-3. If you haven't set the API key in the `.env` file, enter it in the sidebar
-
-4. Start asking questions about the Constitution of Kazakhstan!
+4. The application will automatically:
+   - Download the Llama 2 model (first time only)
+   - Load the Constitution of Kazakhstan
+   - Process and store it in the vector database
 
 ## Using the Application
 
 1. The application automatically loads the Constitution of Kazakhstan when started
-2. You can upload additional documents through the sidebar
-3. Ask questions in the chat interface
-4. The AI will provide answers based on the Constitution and any additional uploaded documents
+2. You can upload additional documents through the sidebar:
+   - Single file upload
+   - Multiple files at once
+   - Supported formats: PDF, DOCX, TXT
+3. Ask questions in the chat interface about:
+   - The Constitution
+   - Any uploaded documents
+4. The AI will provide context-aware answers based on all available documents
 5. Chat history is maintained during the session
-
-## Supported File Types
-
-- PDF (`.pdf`)
-- Microsoft Word (`.docx`)
-- Text files (`.txt`)
 
 ## Technical Details
 
-- Uses LangChain for document processing and chat chain management
+- Uses Llama 2 through Ollama for:
+  - Text embeddings
+  - Question answering
 - Implements ChromaDB as a vector store for efficient document retrieval
-- Utilizes OpenAI's embeddings for document vectorization
 - Features recursive text splitting for optimal context management
+- Uses LangChain for document processing and chat chain management
+
+## File Structure
+
+- `app.py` - Main application code
+- `requirements.txt` - Python dependencies
+- `.gitignore` - Git ignore rules
+- `LICENSE` - MIT License
 
 ## Note
 
-Make sure you have a valid OpenAI API key with sufficient credits to use this application. The application uses the GPT-3.5 Turbo model for generating responses. 
+Make sure Ollama is running before starting the application. The first time you run the application, it will download the Llama 2 model, which may take several minutes depending on your internet connection. 
